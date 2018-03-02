@@ -120,7 +120,12 @@ class Controller extends BaseController
                     'fieldName' => $config['catcherFieldName'],
                 );
 
-                $sources = \Input::get($upConfig['fieldName']);
+                $fieldName = $config['catcherFieldName'];
+                if (isset($_POST[$fieldName])) {
+                    $sources = $_POST[$fieldName];
+                } else {
+                    $sources = $_GET[$fieldName];
+                }
                 $list = [];
                 foreach ($sources as $imgUrl) {
                     $upConfig['imgUrl'] = $imgUrl;
